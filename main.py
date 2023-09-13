@@ -8,7 +8,7 @@ from repositorios.relacao_usuario_fonte_repositorio import (
     InMemoryRepositorioRelacaoUsuarioFonte
 )
 
-from modulos.rss.pegar_fonte import pegar_feed
+from modulos.rss.rss_core import pegar_feed
 
 #############################################################
 # USUARIO

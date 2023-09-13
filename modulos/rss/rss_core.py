@@ -27,12 +27,13 @@ def pegar_feed(url):
             enclosure = item.find('enclosure', first=True)
             encoded = item.find('encoded', first=True).html
 
-            from ipdb import set_trace; set_trace()
         row = {
             'title': titulo, 
             'data_publicacao': data_publicacao, 
             'guid': guid, 
-            'description': descricao
+            'description': descricao,
+            'enclosure': enclosure,
+            'encoded': encoded
         }
         conteudos.append(row)
 
