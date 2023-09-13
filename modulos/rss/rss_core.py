@@ -1,6 +1,7 @@
+from entidades.rss_conteudo import RssConteudo
 from requests.exceptions import RequestException
 from requests_html import HTMLSession
-
+from typing import List
 
 def pegar_fonte(url):
     try: 
@@ -12,7 +13,7 @@ def pegar_fonte(url):
         print(e)
     
         
-def pegar_feed(url):
+def pegar_feed(url) -> List[RssConteudo]:
     resposta = pegar_fonte(url)
     conteudos = []
     
@@ -24,17 +25,17 @@ def pegar_feed(url):
             data_publicacao = item.find('pubDate', first=True).text
             guid = item.find('guid', first=True).text
             descricao = item.find('description', first=True).text
-            enclosure = item.find('enclosure', first=True)
-            encoded = item.find('encoded', first=True).html
+            media = item.find('enclosure', first=True)
+            descricao_completa = item.find('encoded', first=True).html
 
-        row = {
-            'title': titulo, 
-            'data_publicacao': data_publicacao, 
-            'guid': guid, 
-            'description': descricao,
-            'enclosure': enclosure,
-            'encoded': encoded
-        }
-        conteudos.append(row)
+            conteudo = RssConteudo()
+            conteudo.titulo = titulo
+            conteudo.data_publicacao = data_publicacao
+            conteudo.guid = guid
+            conteudo.descricao = descricao
+            conteudo.media = media
+            conteudo.conteudo = descricao_completa
+
+            conteudos.append(conteudo)
 
         return conteudos
