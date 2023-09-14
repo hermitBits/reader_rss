@@ -39,21 +39,18 @@ class IRelacaoUsuarioFonteRepositorio(ABC):
         """Método para deletar uma relação
         
         Args:
-            relacao (RelacaoUsarioFonte): objecto de uma Relação entre fonte e usuario
+            relacao (relacao_id): UUID para pesquisar no repositório
         
         Returns:
-            dict: Dicionário com id, fonte_id e usuario_id para sucesso.
+            bool: True para sucesso
         """
 
     @abstractmethod
-    def get_all(self, relacao_id: str):
-        """Função para capturar XML feed da fonte
-        
-        Args:
-            relacao (RelacaoUsarioFonte): objecto de uma Relação entre fonte e usuario
-        
+    def get_all(self):
+        """Função para pegar todas relacoes
+
         Returns:
-            dict: Dicionário com id, fonte_id e usuario_id para sucesso.
+            list: lista de RelacaoUsarioFonte
         """
 
 
