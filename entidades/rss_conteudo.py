@@ -1,8 +1,14 @@
+# -*- coding: utf-8 -*-
+"""Modulo da entidade RSS Conteudo
+"""
+from dataclasses import dataclass
 from uuid import UUID
 
 
+@dataclass
 class RssConteudo:
-    id: UUID
+    """Classe da entidade RSS Conteudo
+    """
     id_fonte: UUID
     titulo: str
     data_publicacao: str

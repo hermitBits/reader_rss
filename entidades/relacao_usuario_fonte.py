@@ -1,6 +1,13 @@
+# -*- coding: utf-8 -*-
+"""Modulo da entidade Relação usuário e fonte
+"""
+from dataclasses import dataclass
 from uuid import UUID
 
 
+@dataclass
 class RelacaoUsarioFonte:
-    id_usuario: str
+    """Classe da entidade Relação usuário e fonte
+    """
+    id_usuario: UUID
     id_fonte: UUID

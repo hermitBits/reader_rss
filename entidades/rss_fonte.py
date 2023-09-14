@@ -1,7 +1,12 @@
-from uuid import UUID
+# -*- coding: utf-8 -*-
+"""Modulo da entidade RSS Fonte
+"""
+from dataclasses import dataclass
 
 
+@dataclass
 class RssFonte:
-    id: UUID
+    """Classe da entidade RSS Fonte
+    """
     nome: str
     url: str

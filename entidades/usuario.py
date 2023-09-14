@@ -1,8 +1,13 @@
-from uuid import UUID
+# -*- coding: utf-8 -*-
+"""Modulo da entidade Usuário
+"""
+from dataclasses import dataclass
 
 
+@dataclass
 class Usuario:
-    id: UUID
+    """Classe da entidade Usuário
+    """
     nome: str
     usuario_nome: str
     senha: str
