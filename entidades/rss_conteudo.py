@@ -9,7 +9,7 @@ from uuid import UUID
 class RssConteudo:
     """Classe da entidade RSS Conteudo
     """
-    id_fonte: UUID
+    fonte_id: UUID
     titulo: str
     data_publicacao: str
     guid: str

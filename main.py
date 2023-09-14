@@ -18,10 +18,11 @@ repositorio_usuarios = InMemoryRepositorioUsuario(
     dictionary_structure=banco
 )
 
-primeiro_usuario = Usuario()
-primeiro_usuario.nome = 'Mateus Camargo'
-primeiro_usuario.usuario_nome = 'mateus'
-primeiro_usuario.senha = 'senha'
+primeiro_usuario = Usuario(
+    nome='Mateus',
+    usuario_nome='mateus',
+    senha='senha'
+)
 
 salvando_usuario = repositorio_usuarios.save(usuario=primeiro_usuario)
 
@@ -36,9 +37,10 @@ repositorio_rss_fontes = InMemoryRepositorioRSSFonte(
     dictionary_structure=banco
 )
 
-primeiro_rss_fonte = RssFonte()
-primeiro_rss_fonte.nome = 'wiki futebol'
-primeiro_rss_fonte.url = 'http://example.com/rss/'
+primeiro_rss_fonte = RssFonte(
+    nome='Segurança Legal',
+    url='https://www.segurancalegal.com/feed/'
+)
 
 salvando_rss_fonte = repositorio_rss_fontes.save(
     rss_fonte=primeiro_rss_fonte
@@ -55,9 +57,10 @@ repositorio_relacao_fonte_usuario = InMemoryRepositorioRelacaoUsuarioFonte(
     dictionary_structure=banco
 )
 
-primeira_relacao = RelacaoUsarioFonte()
-primeira_relacao.id_fonte = salvando_rss_fonte.get('id')
-primeira_relacao.id_usuario = salvando_usuario.get('id')
+primeira_relacao = RelacaoUsarioFonte(
+    fonte_id=salvando_rss_fonte.get('id'),
+    usuario_id=salvando_usuario.get('id')
+)
 
 salvando_relacao = repositorio_relacao_fonte_usuario.save(
     relacao=primeira_relacao
@@ -69,8 +72,11 @@ if salvando_relacao:
 #############################################################
 # PEGANDO RSS
 url = 'https://www.segurancalegal.com/feed/'
-feeds = pegar_feed(url)
+conteudos = pegar_feed(url)
 
-if feeds:
-    for item in feeds:
-        print(f'Titulo: {item.titulo} GUID: {item.guid}')
+if conteudos:
+    for conteudo in conteudos:
+        print('Titulo: {} GUID: {}'.format(
+            conteudo.get('titulo'), 
+            conteudo.get('guid')
+        ))

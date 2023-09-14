@@ -20,6 +20,6 @@ class InMemoryRepositorioRelacaoUsuarioFonte(IRelacaoUsuarioFonteRepositorio):
         self.dictionary_structure[relacao_id] = relacao
         return {
             'id': relacao_id,
-            'id_fonte': relacao.id_fonte,
-            'id_usuario': relacao.id_usuario,
+            'fonte_id': relacao.fonte_id,
+            'usuario_id': relacao.usuario_id,
         }

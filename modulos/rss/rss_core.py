@@ -3,6 +3,7 @@ from requests.exceptions import RequestException
 from requests_html import HTMLSession
 from typing import List
 
+
 def pegar_fonte(url):
     try: 
         sessao = HTMLSession()
@@ -28,14 +29,15 @@ def pegar_feed(url) -> List[RssConteudo]:
             media = item.find('enclosure', first=True)
             descricao_completa = item.find('encoded', first=True).html
 
-            conteudo = RssConteudo()
-            conteudo.titulo = titulo
-            conteudo.data_publicacao = data_publicacao
-            conteudo.guid = guid
-            conteudo.descricao = descricao
-            conteudo.media = media
-            conteudo.conteudo = descricao_completa
-
-            conteudos.append(conteudo)
+            data = {
+                'titulo': titulo,
+                'data_publicacao': data_publicacao,
+                'guid': guid,
+                'descricao': descricao,
+                'media': media,
+                'conteudo': descricao_completa,
+            }
+            
+            conteudos.append(data)
 
         return conteudos

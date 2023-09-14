@@ -9,5 +9,5 @@ from uuid import UUID
 class RelacaoUsarioFonte:
     """Classe da entidade Relação usuário e fonte
     """
-    id_usuario: UUID
-    id_fonte: UUID
+    usuario_id: UUID
+    fonte_id: UUID

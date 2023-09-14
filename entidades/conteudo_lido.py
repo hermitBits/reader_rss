@@ -9,6 +9,6 @@ from uuid import UUID
 class ConteudoLido:
     """Classe da entidade Usuário
     """
-    id_usuario: UUID
-    id_conteudo: UUID
+    usuario_id: UUID
+    conteudo_id: UUID
     lido: bool
