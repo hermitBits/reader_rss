@@ -1,15 +1,21 @@
 # -*- coding: utf-8 -*-
 """Modulo Core de processamento de RSS
 """
-from typing import List
+from typing import List, Dict
 
 from requests.exceptions import RequestException
 from requests_html import HTMLSession
-from entidades.rss_conteudo import RssConteudo
 
 
 def pegar_fonte(url):
     """Função para capturar XML feed da fonte
+    
+    Args:
+        url (string): url da fonte
+        
+    Returns:
+        O retorno será, HTMLSession da classe para sucesso, None para erro.
+    
     """
     resposta = None
     try:
@@ -22,8 +28,15 @@ def pegar_fonte(url):
     return resposta
 
 
-def pegar_feed(url) -> List[RssConteudo]:
+def pegar_feed(url) -> List[Dict[str, str]]:
     """Função para capturar campos principais para criar um feed amigavel
+    
+    Args:
+        url (string): url da fonte
+        
+    Returns:
+        list: Dicionarios com conteudo para sucesso, array vazia para erro ou
+        quando a fonte não tiver nenhum conteudo para lançar.
     """
     resposta = pegar_fonte(url)
     conteudos = []
