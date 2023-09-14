@@ -71,4 +71,6 @@ if salvando_relacao:
 url = 'https://www.segurancalegal.com/feed/'
 feeds = pegar_feed(url)
 
-from ipdb import set_trace; set_trace()
+if feeds:
+    for item in feeds:
+        print(f'Titulo: {item.titulo} GUID: {item.guid}')
