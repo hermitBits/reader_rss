@@ -1,25 +1,28 @@
-from entidades.rss_conteudo import RssConteudo
+from typing import List
+
 from requests.exceptions import RequestException
 from requests_html import HTMLSession
-from typing import List
+from entidades.rss_conteudo import RssConteudo
 
 
 def pegar_fonte(url):
-    try: 
+    resposta = None
+    try:
         sessao = HTMLSession()
         resposta = sessao.get(url)
-        
+
         return resposta
-    except RequestException as e:
-        print(e)
-    
-        
+    except RequestException as error:
+        print(error)
+    return resposta
+
+
 def pegar_feed(url) -> List[RssConteudo]:
     resposta = pegar_fonte(url)
     conteudos = []
-    
-    with resposta as r:
-        items = r.html.find('item', first=False)
+
+    with resposta:
+        items = resposta.html.find('item', first=False)
 
         for item in items:
             titulo = item.find('title', first=True).text
@@ -37,7 +40,7 @@ def pegar_feed(url) -> List[RssConteudo]:
                 'media': media,
                 'conteudo': descricao_completa,
             }
-            
+
             conteudos.append(data)
 
-        return conteudos
+    return conteudos
