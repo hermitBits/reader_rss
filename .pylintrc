@@ -2,9 +2,12 @@
 ignore-patterns=
     Makefile,
     venv,
-    requeriments.txt,
+    requirements.txt,
     coisas.txt,
     main.py
+
+[MESSAGES CONTROL]
+disable=C0103
 
 [REPORTS]
 reports=no

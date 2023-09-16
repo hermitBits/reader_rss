@@ -17,29 +17,29 @@ class IUsarioRepositorio(ABC):
         """Método para salvar no repositorio
 
         Args:
-            usuario (Usuario): objecto de RssFonte
+            usuario (Usuario): objecto de Usuario
 
         Returns:
             Usuario: Objeto Usuario
         """
 
     @abstractmethod
-    def get_by_id(self, rss_fonte_id: UUID) -> Usuario:
+    def get_by_id(self, usuario: UUID) -> Usuario:
         """Método pesquisar uma usuários
         
         Args:
-            rss_fonte_id (UUID): UUID para pesquisar no repositório
+            usuario (UUID): UUID para pesquisar no repositório
         
         Returns:
-            RssFonte: retorna uma objeto de rss fonte
+            RssFonte: retorna uma objeto de usuario
         """
 
     @abstractmethod
-    def delete(self, rss_fonte_id: str) -> bool:
+    def delete(self, usuario: str) -> bool:
         """Método para deletar um usuário
         
         Args:
-            rss_fonte_id (UUID): UUID para pesquisar no repositório
+            usuario (UUID): UUID para pesquisar no repositório
         
         Returns:
             bool: True para sucesso
@@ -50,7 +50,7 @@ class IUsarioRepositorio(ABC):
         """Função para pegar todos usuários
 
         Returns:
-            list: lista de RssFonte
+            list: lista de Usuario
         """
 
 

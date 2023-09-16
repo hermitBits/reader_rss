@@ -20,11 +20,12 @@ class Usuario:
         self.senha = md5(self.senha.encode('utf8')).hexdigest()
 
     def set_id(self, _id):
-        """ Atribuir id á entidade
+        """Atribuir id á entidade
         """
         self._id = _id
 
     @property
     def id(self):
-        self._id
-        
+        """Acessar o valor ID
+        """
+        return self._id
