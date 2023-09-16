@@ -1,23 +1,72 @@
+# -*- coding: utf-8 -*-
+"""Modulo do repositorio de Usuario
+"""
 from abc import ABC, abstractmethod
-from entidades.usuario import Usuario
 from uuid import uuid4, UUID
-from typing import Dict
+from typing import Dict, List
+
+from entidades.usuario import Usuario
 
 
 class IUsarioRepositorio(ABC):
+    """Interface para classe do repositorio implementar
+    """
+
     @abstractmethod
-    def save(self, usuario: Usuario): ...
+    def save(self, usuario: Usuario) -> Usuario:
+        """Método para salvar no repositorio
+
+        Args:
+            usuario (Usuario): objecto de RssFonte
+
+        Returns:
+            Usuario: Objeto Usuario
+        """
+
+    @abstractmethod
+    def get_by_id(self, rss_fonte_id: UUID) -> Usuario:
+        """Método pesquisar uma usuários
+        
+        Args:
+            rss_fonte_id (UUID): UUID para pesquisar no repositório
+        
+        Returns:
+            RssFonte: retorna uma objeto de rss fonte
+        """
+
+    @abstractmethod
+    def delete(self, rss_fonte_id: str) -> bool:
+        """Método para deletar um usuário
+        
+        Args:
+            rss_fonte_id (UUID): UUID para pesquisar no repositório
+        
+        Returns:
+            bool: True para sucesso
+        """
+
+    @abstractmethod
+    def get_all(self) -> List[Usuario]:
+        """Função para pegar todos usuários
+
+        Returns:
+            list: lista de RssFonte
+        """
 
 
 class InMemoryRepositorioUsuario(IUsarioRepositorio):
-    def __init__(self, dictionary_structure: Dict[UUID, Usuario] = {}):
+    """Classe que implementa repositorio em memoria dos usuarios
+    """
+    def __init__(self, dictionary_structure: Dict[UUID, Usuario] = None):
         self.dictionary_structure = dictionary_structure
 
     def save(self, usuario: Usuario):
-        usuario_id = uuid4()
-        self.dictionary_structure[usuario_id] = usuario
-        return {
-            'id': usuario_id,
-            'nome': usuario.nome,
-            'usuario_nome': usuario.usuario_nome
-        }
+        usuario.set_id(uuid4())
+        self.dictionary_structure[usuario.id] = usuario
+        return usuario
+
+    def delete(self, usuario: str): ...
+
+    def get_all(self): ...
+
+    def get_by_id(self, usuario: UUID): ...
