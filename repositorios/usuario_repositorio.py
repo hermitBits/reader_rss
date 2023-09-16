@@ -8,7 +8,7 @@ from typing import Dict, List
 from entidades.usuario import Usuario
 
 
-class IUsarioRepositorio(ABC):
+class IUsuarioRepositorio(ABC):
     """Interface para classe do repositorio implementar
     """
 
@@ -54,7 +54,7 @@ class IUsarioRepositorio(ABC):
         """
 
 
-class InMemoryRepositorioUsuario(IUsarioRepositorio):
+class InMemoryRepositorioUsuario(IUsuarioRepositorio):
     """Classe que implementa repositorio em memoria dos usuarios
     """
     def __init__(self, dictionary_structure: Dict[UUID, Usuario] = None):
@@ -67,6 +67,7 @@ class InMemoryRepositorioUsuario(IUsarioRepositorio):
 
     def delete(self, usuario: str): ...
 
-    def get_all(self): ...
+    def get_all(self):
+        return list(self.dictionary_structure.items())
 
     def get_by_id(self, usuario: UUID): ...
