@@ -1,2 +1,2 @@
 [MASTER]
-ignore=venv,requeriments.txt
+ignore=venv,Makefile,requeriments.txt
