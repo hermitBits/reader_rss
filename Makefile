@@ -16,6 +16,7 @@ python/run: ${VIRTUALENV_NAME}/bin/activate ## Executa o código
 	./${VIRTUALENV_NAME}/bin/${PYTHON_EXE} main.py
 
 python/clean: ## limpa o ambiente virtual criado
+	@find . -regex '^.*\(__pycache__\|\.py[co]\)$' -not -path "./venv/*" -delete
 	rm -rf ${VIRTUALENV_NAME}
 
 .PHONY: help

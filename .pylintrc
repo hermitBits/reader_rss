@@ -1,2 +1,10 @@
 [MASTER]
-ignore=venv,Makefile,requeriments.txt
+ignore-patterns=
+    Makefile,
+    venv,
+    requeriments.txt,
+    coisas.txt,
+    main.py
+
+[REPORTS]
+reports=no
