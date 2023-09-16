@@ -18,3 +18,7 @@ class RssFonte:
         """ Atribuir id á entidade
         """
         self._id = _id
+
+    @property
+    def id(self):
+        return self._id
