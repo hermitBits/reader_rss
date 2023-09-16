@@ -1,16 +1,23 @@
-.PHONY: help
-help: ## show help message
-	@egrep -h '\s##\s' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
+VIRTUALENV_NAME=venv
+PYTHON_EXE=python3
+PIP_EXE=pip
+PATH_LINT=*
+
+default: help
 
 python/setup: requirements.txt ## Cria virtualenv e instala as dependencias de pacotes
-	python3 -m virtualenv venv
-	./venv/bin/pip install -r requirements.txt
+	${PYTHON_EXE} -m virtualenv ${VIRTUALENV_NAME}
+	./${VIRTUALENV_NAME}/bin/${PIP_EXE} install -r requirements.txt
 
-python/lint: venv/bin/activate ## Faz checagem de codestyle com pylint
-	./venv/bin/python3 -m pylint *
+python/lint: ${VIRTUALENV_NAME}/bin/activate ## Faz checagem de codestyle com pylint
+	./${VIRTUALENV_NAME}/bin/${PYTHON_EXE} -m pylint ${PATH_LINT}
 
-python/run: venv/bin/activate ## Executa o código
-	./venv/bin/python3 main.py
+python/run: ${VIRTUALENV_NAME}/bin/activate ## Executa o código
+	./${VIRTUALENV_NAME}/bin/${PYTHON_EXE} main.py
 
 python/clean: ## limpa o ambiente virtual criado
-	rm -rf venv
+	rm -rf ${VIRTUALENV_NAME}
+
+.PHONY: help
+help: ## show help message
+	@egrep -h '\s##\s' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
