@@ -19,6 +19,9 @@ python/clean: ## limpa o ambiente virtual criado
 	@find . | grep -E "(__pycache__|\.pyc$$)" | xargs rm -rf
 	@rm -rf ${VIRTUALENV_NAME}
 
+python/tests: ${VIRTUALENV_NAME}/bin/activate ## executa testes
+	./${VIRTUALENV_NAME}/bin/${PYTHON_EXE} -m pytest -v
+
 .PHONY: help
 help: ## show help message
 	@egrep -h '\s##\s' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
