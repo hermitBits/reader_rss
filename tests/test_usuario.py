@@ -1,5 +1,7 @@
 import pytest
 
+from faker import Faker
+
 from entidades.usuario import Usuario
 
 from repositorios.usuario_repositorio import InMemoryRepositorioUsuario
@@ -10,23 +12,20 @@ from casos_de_uso.usuario.criar_usuario import CriarUsuarioSolicitar
 from casos_de_uso.usuario.usuario_errors import SenhaCurta, UsuarioNomeJaExiste
 
 
-def criar_repositorio():
-    banco = {}
-
-    repositorio_usuario = InMemoryRepositorioUsuario(
-        dictionary_structure=banco
-    )
-
-    return repositorio_usuario
+fake = Faker()
 
 
 @pytest.fixture
 def repositorio_setup():
-    repositorio = criar_repositorio()
+    banco = {}
 
+    repositorio = InMemoryRepositorioUsuario(
+        dictionary_structure=banco
+    )
+    
     usuario_teste = Usuario(
-        nome='Mateus',
-        usuario_nome='mateus',
+        nome=fake.name(),
+        usuario_nome='usuario123',
         senha='senha123'
     )
 
@@ -49,8 +48,8 @@ def test_caso_de_uso_todos_usuario(repositorio_setup):
 
 def test_caso_de_uso_criar_usuario_ja_existe(repositorio_setup):
     solicitacao_criar_usuario = CriarUsuarioSolicitar(
-        nome='Mateus',
-        usuario_nome='mateus',
+        nome=fake.profile().get('name'),
+        usuario_nome='usuario123',
         senha='senha123'
     )
 
@@ -64,8 +63,8 @@ def test_caso_de_uso_criar_usuario_ja_existe(repositorio_setup):
 
 def test_caso_de_uso_criar_usuario_senha_curta(repositorio_setup):
     solicitacao_criar_usuario = CriarUsuarioSolicitar(
-        nome='Mateus',
-        usuario_nome='mateus21312',
+        nome=fake.profile().get('name'),
+        usuario_nome=fake.profile().get('username'),
         senha='s'
     )
 
@@ -75,3 +74,19 @@ def test_caso_de_uso_criar_usuario_senha_curta(repositorio_setup):
         ).execute(
             solicitar=solicitacao_criar_usuario
         )
+
+
+def test_caso_de_uso_criar_usuario(repositorio_setup):
+    solicitacao_criar_usuario = CriarUsuarioSolicitar(
+        nome=fake.profile().get('name'),
+        usuario_nome=fake.profile().get('username'),
+        senha=fake.password(length=12)
+    )
+
+    usuario = CasodeUsoCriarUsuario(
+        repositorio=repositorio_setup
+    ).execute(
+        solicitar=solicitacao_criar_usuario
+    )
+
+    assert isinstance(usuario, Usuario)
