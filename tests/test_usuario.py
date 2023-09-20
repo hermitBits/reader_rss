@@ -22,7 +22,7 @@ def repositorio_setup():
     repositorio = InMemoryRepositorioUsuario(
         dictionary_structure=banco
     )
-    
+
     usuario_teste = Usuario(
         nome=fake.name(),
         usuario_nome='usuario123',
@@ -90,3 +90,4 @@ def test_caso_de_uso_criar_usuario(repositorio_setup):
     )
 
     assert isinstance(usuario, Usuario)
+

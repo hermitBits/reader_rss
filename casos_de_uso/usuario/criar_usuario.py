@@ -32,7 +32,6 @@ class CriarUsuarioResposta:
     ativo: bool
 
 
-@dataclass
 class CasodeUsoCriarUsuario(ICasodeUso):
     """_Caso de uso para criação de um usuario
 
